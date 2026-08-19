@@ -48,3 +48,7 @@ Once running, the applications are available at:
 - `GET /api/projects` - Retrieves the seeded portfolio projects.
 - `POST /api/contact` - Saves incoming message entries to MongoDB and triggers a mail forward.
 - `GET /api/seed` - Pre-populates clean project data into MongoDB.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
