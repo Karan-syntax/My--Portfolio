@@ -110,8 +110,8 @@ app.post('/api/contact', async (req, res) => {
 
         // 2. Setup the Email Notification Layout
         const mailOptions = {
-            from: 'karan.kr.v@gmail.com', 
-            to: 'karan.kr.v@gmail.com',   
+            from: process.env.EMAIL_USER, 
+            to: process.env.EMAIL_USER,   
             replyTo: email,               
             subject: `💼 New Portfolio Message from ${name}`,
             html: `
