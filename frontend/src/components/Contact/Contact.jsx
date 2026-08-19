@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import SectionHeading from "../SectionHeading/SectionHeading";
 import { FaPaperPlane, FaEnvelope, FaMapMarkerAlt, FaUser, FaGithub, FaLinkedin } from "react-icons/fa";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ const Contact = () => {
     setStatus({ submitting: true, success: null, message: "" });
 
     try {
-      const response = await axios.post("/api/contact", formData);
+      const response = await axios.post(`${API_URL}/api/contact`, formData);
       if (response.data && response.data.success) {
         setStatus({
           submitting: false,

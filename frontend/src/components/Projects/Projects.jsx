@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import SectionHeading from "../SectionHeading/SectionHeading";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -40,7 +41,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get("/api/projects");
+        const response = await axios.get(`${API_URL}/api/projects`);
         if (response.data && response.data.length > 0) {
           setProjects(response.data);
         } else {
