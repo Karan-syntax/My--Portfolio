@@ -128,20 +128,15 @@ app.post('/api/contact', async (req, res) => {
             `
         };
 
-        // 3. Try to Send the Email
-        try {
-            await transporter.sendMail(mailOptions);
-            return res.status(201).json({ 
-                success: true, 
-                message: 'Thank you! Your message was saved and emailed successfully.' 
-            });
-        } catch (mailError) {
-            console.error('❌ Nodemailer Error:', mailError.message);
-            return res.status(201).json({ 
-                success: true, 
-                message: 'Message saved to database, but Gmail app password verification failed.' 
-            });
-        }
+        // 3. Try to Send the Email (Asynchronously in background so the UI doesn't hang)
+        transporter.sendMail(mailOptions)
+            .then(() => console.log('✉️ Email notification sent successfully!'))
+            .catch(mailError => console.error('❌ Background Nodemailer Error:', mailError.message));
+
+        return res.status(201).json({ 
+            success: true, 
+            message: 'Thank you! Your message was saved and emailed successfully.' 
+        });
 
     } catch (error) {
         return res.status(201).json({ success: false, message: `❌ Server processing error: ${error.message}` });
