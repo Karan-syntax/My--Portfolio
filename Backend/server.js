@@ -50,12 +50,12 @@ const Contact = mongoose.model('Contact', contactSchema);
 
 
 // --- Configure Nodemailer Transporter ---
-// Log securely into your personal Gmail using your fresh 16-character App Password (no spaces)
+// Log securely using environment variables loaded from the .env file
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'karan.kr.v24@gmail.com', 
-        pass: 'mjna oifk qxlu xghd' 
+        user: process.env.EMAIL_USER, 
+        pass: process.env.EMAIL_PASS 
     }
 });
 
@@ -148,18 +148,18 @@ app.get('/api/seed', async (req, res) => {
                 gitLink: "https://github.com/Karan-syntax/personal-expense-tracker"
             },
             {
-                title: "Campus Event API Portal",
-                description: "A secure REST API built with Spring Boot and PostgreSQL, offering user registration, role authorization, validation, pagination, and Swagger UI documentation.",
-                technologies: ["Java", "Spring Boot", "PostgreSQL", "Docker"],
+                title: "Task Management Application",
+                description: "A complete application utilizing state flows, context variables, and deep user authentication methods.",
+                technologies: ["React", "Express", "Node.js", "MongoDB"],
                 liveLink: "#",
-                gitLink: "https://github.com/Karan-syntax"
+                gitLink: "#"
             },
             {
-                title: "Personal Finance backend",
-                description: "A backend service featuring Spring Security, JWT authentication, and automated Mockito/JUnit 5 unit tests for financial transactions.",
-                technologies: ["Java", "Spring Security", "JWT", "JUnit 5"],
+                title: "E-Commerce Web Portal",
+                description: "An elegant web portal built to store data elements, structure product lists, and log active shopping data profiles.",
+                technologies: ["React", "Node.js", "Express", "MongoDB"],
                 liveLink: "#",
-                gitLink: "https://github.com/Karan-syntax"
+                gitLink: "#"
             }
         ]);
         res.json({ message: "Database successfully populated with clean items!" });
