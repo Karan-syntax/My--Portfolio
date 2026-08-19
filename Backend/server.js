@@ -76,6 +76,15 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+const CONTACT_RECIPIENT = process.env.CONTACT_RECIPIENT || 'karan.kr.v24@gmail.com';
+
+const escapeHtml = (value = '') => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
 
 // --- API Routes ---
 
@@ -115,27 +124,34 @@ app.post('/api/contact', async (req, res) => {
         // 2. Setup the Email Notification Layout
         const mailOptions = {
             from: process.env.EMAIL_USER, 
-            to: process.env.EMAIL_USER,   
+            to: CONTACT_RECIPIENT,
             replyTo: email,               
             subject: `💼 New Portfolio Message from ${name}`,
             html: `
                 <div style="font-family: sans-serif; padding: 20px; color: #1e293b; max-width: 600px; border: 1px solid #e2e8f0; border-radius: 8px;">
                     <h2 style="color: #0284c7; margin-top: 0;">You have a new portfolio submission!</h2>
                     <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 20px;" />
-                    <p><strong>Client Name:</strong> ${name}</p>
-                    <p><strong>Client Email:</strong> <a href="mailto:${email}" style="color: #0284c7; text-decoration: none;">${email}</a></p>
+                    <p><strong>Client Name:</strong> ${escapeHtml(name)}</p>
+                    <p><strong>Client Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #0284c7; text-decoration: none;">${escapeHtml(email)}</a></p>
                     <p style="margin-bottom: 5px;"><strong>Message Details:</strong></p>
                     <div style="padding: 15px; background-color: #f8fafc; border-left: 4px solid #38bdf8; border-radius: 4px; font-style: italic; color: #334155;">
-                        "${message}"
+                        "${escapeHtml(message)}"
                     </div>
                 </div>
             `
         };
 
-        // 3. Try to Send the Email (Asynchronously in background so the UI doesn't hang)
-        transporter.sendMail(mailOptions)
-            .then(() => console.log('✉️ Email notification sent successfully!'))
-            .catch(mailError => console.error('❌ Background Nodemailer Error:', mailError.message));
+        // 3. Await delivery so the UI never reports success when SMTP fails.
+        try {
+            await transporter.sendMail(mailOptions);
+            console.log(`✉️ Email notification sent to ${CONTACT_RECIPIENT}`);
+        } catch (mailError) {
+            console.error('❌ Nodemailer Error:', mailError.message);
+            return res.status(502).json({
+                success: false,
+                message: 'Message was saved, but the email notification could not be delivered.'
+            });
+        }
 
         return res.status(201).json({ 
             success: true, 

@@ -44,7 +44,7 @@ const Contact = () => {
         setStatus({
           submitting: false,
           success: true,
-          message: "Thank you! Your message was saved in our database.",
+          message: "Thank you! Your message was sent successfully.",
         });
         setFormData({ name: "", email: "", message: "" });
       } else {
@@ -94,7 +94,7 @@ const Contact = () => {
                 </div>
                 <div className="contact-detail-text">
                   <h4>Email</h4>
-                  <a href="mailto:karan.kr.v@gmail.com">karan.kr.v@gmail.com</a>
+                  <a href="mailto:karan.kr.v24@gmail.com">karan.kr.v24@gmail.com</a>
                 </div>
               </div>
 
