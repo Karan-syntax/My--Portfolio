@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
 const dns = require('dns');
 require('dotenv').config();
 
@@ -56,36 +55,6 @@ const projectSchema = new mongoose.Schema({
 });
 const Project = mongoose.model('Project', projectSchema);
 
-// 2. Contact Messages Schema
-const contactSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    message: { type: String, required: true },
-    date: { type: Date, default: Date.now }
-});
-const Contact = mongoose.model('Contact', contactSchema);
-
-
-// --- Configure Nodemailer Transporter ---
-// Log securely using environment variables loaded from the .env file
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER, 
-        pass: process.env.EMAIL_PASS 
-    }
-});
-
-const CONTACT_RECIPIENT = process.env.CONTACT_RECIPIENT || 'karan.kr.v24@gmail.com';
-
-const escapeHtml = (value = '') => String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-
-
 // --- API Routes ---
 
 // Route 1: Get all projects for your portfolio cards
@@ -98,72 +67,7 @@ app.get('/api/projects', async (req, res) => {
     }
 });
 
-// Route 2: Receive and save a user contact message, then forward to Karan
-app.post('/api/contact', async (req, res) => {
-    try {
-        if (!req.body || Object.keys(req.body).length === 0) {
-            return res.status(200).json({ success: false, message: "⚠️ Request body reached backend completely empty." });
-        }
-
-        const { name, email, message } = req.body;
-
-        // 1. Try to Save to MongoDB
-        try {
-            const newContact = new Contact({ name, email, message });
-            await newContact.save();
-            console.log("✅ Message safely logged into MongoDB!");
-        } catch (dbError) {
-            console.error('❌ Database Error:', dbError.message);
-            // If database fails, report it directly to the UI instead of crashing with a 500 error!
-            return res.status(201).json({ 
-                success: false, 
-                message: `❌ MongoDB Database Error: ${dbError.message}. Make sure your local MongoDB service is running!` 
-            });
-        }
-
-        // 2. Setup the Email Notification Layout
-        const mailOptions = {
-            from: process.env.EMAIL_USER, 
-            to: CONTACT_RECIPIENT,
-            replyTo: email,               
-            subject: `💼 New Portfolio Message from ${name}`,
-            html: `
-                <div style="font-family: sans-serif; padding: 20px; color: #1e293b; max-width: 600px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                    <h2 style="color: #0284c7; margin-top: 0;">You have a new portfolio submission!</h2>
-                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 20px;" />
-                    <p><strong>Client Name:</strong> ${escapeHtml(name)}</p>
-                    <p><strong>Client Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #0284c7; text-decoration: none;">${escapeHtml(email)}</a></p>
-                    <p style="margin-bottom: 5px;"><strong>Message Details:</strong></p>
-                    <div style="padding: 15px; background-color: #f8fafc; border-left: 4px solid #38bdf8; border-radius: 4px; font-style: italic; color: #334155;">
-                        "${escapeHtml(message)}"
-                    </div>
-                </div>
-            `
-        };
-
-        // 3. Await delivery so the UI never reports success when SMTP fails.
-        try {
-            await transporter.sendMail(mailOptions);
-            console.log(`✉️ Email notification sent to ${CONTACT_RECIPIENT}`);
-        } catch (mailError) {
-            console.error('❌ Nodemailer Error:', mailError.message);
-            return res.status(502).json({
-                success: false,
-                message: 'Message was saved, but the email notification could not be delivered.'
-            });
-        }
-
-        return res.status(201).json({ 
-            success: true, 
-            message: 'Thank you! Your message was saved and emailed successfully.' 
-        });
-
-    } catch (error) {
-        return res.status(201).json({ success: false, message: `❌ Server processing error: ${error.message}` });
-    }
-});
-
-// Route 3: Seed Route (Populates clean dummy data into your portfolio cards)
+// Route 2: Seed Route (Populates clean dummy data into your portfolio cards)
 app.get('/api/seed', async (req, res) => {
     try {
         await Project.deleteMany({}); // Clears old entries

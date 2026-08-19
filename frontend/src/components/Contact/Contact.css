@@ -88,11 +88,11 @@
    CONTACT FORM (RIGHT)
    ========================= */
 
-.contact-form-container {
+.contact-cta-container {
   width: 100%;
 }
 
-.contact-form {
+.contact-cta {
   position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -102,6 +102,26 @@
   -webkit-backdrop-filter: var(--glass-blur);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
+  text-align: center;
+}
+
+.contact-cta-icon {
+  color: var(--primary);
+  font-size: 2.5rem;
+  margin-bottom: 18px;
+}
+
+.contact-cta h3 {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.contact-cta p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 auto 28px;
+  max-width: 330px;
 }
 
 .contact-glow {
@@ -178,6 +198,7 @@
   color: white;
   box-shadow: var(--shadow-sm);
   transition: all 0.35s ease;
+  text-decoration: none;
 }
 
 .submit-btn:hover {
