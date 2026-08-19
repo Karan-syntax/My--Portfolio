@@ -2,7 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+const dns = require('dns');
 require('dotenv').config();
+
+// Force Node.js to prefer IPv4 DNS resolution (prevents ENETUNREACH errors on Render/IPv6)
+dns.setDefaultResultOrder('ipv4first');
 
 const app = express();
 
