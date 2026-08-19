@@ -20,22 +20,6 @@ const Projects = () => {
       liveLink: "#",
       gitLink: "https://github.com/Karan-syntax/personal-expense-tracker",
     },
-    {
-      _id: "2",
-      title: "Campus Event API Portal",
-      description: "A secure REST API built with Spring Boot and PostgreSQL, offering user registration, role authorization, validation, pagination, and Swagger UI documentation.",
-      technologies: ["Java", "Spring Boot", "PostgreSQL", "Docker"],
-      liveLink: "#",
-      gitLink: "https://github.com/Karan-syntax",
-    },
-    {
-      _id: "3",
-      title: "Personal Finance backend",
-      description: "A backend service featuring Spring Security, JWT authentication, and automated Mockito/JUnit 5 unit tests for financial transactions.",
-      technologies: ["Java", "Spring Security", "JWT", "JUnit 5"],
-      liveLink: "#",
-      gitLink: "https://github.com/Karan-syntax",
-    },
   ];
 
   useEffect(() => {
