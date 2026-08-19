@@ -51,7 +51,7 @@ const Contact = () => {
         setStatus({
           submitting: false,
           success: false,
-          message: "Server received request but failed to save.",
+          message: response.data.message || "Server received request but failed to save.",
         });
       }
     } catch (error) {
