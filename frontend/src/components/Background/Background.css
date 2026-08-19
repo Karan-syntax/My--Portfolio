@@ -1,0 +1,72 @@
+.bg-grid{
+position:fixed;
+inset:0;
+background-image:
+linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+background-size:55px 55px;
+z-index:-5;
+}
+
+.blob{
+position:fixed;
+border-radius:50%;
+filter:blur(120px);
+opacity:.45;
+animation:float 12s infinite alternate ease-in-out;
+z-index:-4;
+}
+
+.blob1{
+width:420px;
+height:420px;
+background:#1f4d5a;
+
+opacity:.55;
+top:-120px;
+left:-120px;
+}
+
+.blob2{
+width:350px;
+height:350px;
+background:#5ea3a3;
+
+opacity:.45;
+right:-100px;
+top:35%;
+animation-delay:2s;
+}
+
+.blob3{
+width:300px;
+height:300px;
+background:#163846;
+
+opacity:.45;
+bottom:-100px;
+left:40%;
+animation-delay:4s;
+}
+
+.noise{
+position:fixed;
+inset:0;
+background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);
+background-size:5px 5px;
+pointer-events:none;
+opacity:.12;
+z-index:-3;
+}
+
+@keyframes float{
+
+0%{
+transform:translate(0,0) scale(1);
+}
+
+100%{
+transform:translate(40px,-40px) scale(1.15);
+}
+
+}

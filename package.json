@@ -1,0 +1,13 @@
+{
+  "name": "thiranex-root",
+  "version": "1.0.0",
+  "description": "Root configuration to run Thiranex frontend and backend concurrently.",
+  "scripts": {
+    "install:all": "npm install --prefix frontend && npm install --prefix Backend && npm install",
+    "dev:all": "concurrently \"npm run dev --prefix frontend\" \"npm start --prefix Backend\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "nodemailer": "^9.0.3"
+  }
+}

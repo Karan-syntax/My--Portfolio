@@ -1,0 +1,122 @@
+/* ===========================================================
+   FOOTER SECTION
+   =========================================================== */
+
+.footer {
+  background: #0b1821;
+  border-top: 1px solid rgba(94, 163, 163, 0.12);
+  padding: 50px 0 24px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* =========================
+   LEFT
+   ========================= */
+
+.footer-left h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.footer-left h2 span {
+  font-weight: 300;
+  color: var(--text-secondary);
+}
+
+.footer-left p {
+  font-size: 0.85rem;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   SOCIALS
+   ========================= */
+
+.footer-socials {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(15, 31, 43, 0.8);
+  border: 1px solid rgba(94, 163, 163, 0.15);
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  transition: all 0.3s ease;
+}
+
+.footer-socials a:hover {
+  color: var(--text-primary);
+  border-color: var(--primary);
+  background: var(--secondary);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(94, 163, 163, 0.25);
+}
+
+/* =========================
+   RIGHT SCROLL UP
+   ========================= */
+
+.scroll-to-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #0f1f2b;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(94, 163, 163, 0.3);
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(94, 163, 163, 0.5);
+  background: #71b8b8;
+}
+
+/* =========================
+   BOTTOM
+   ========================= */
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(94, 163, 163, 0.08);
+  padding-top: 24px;
+}
+
+.footer-bottom p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* =========================
+   RESPONSIVE LAYOUT
+   ========================= */
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+}

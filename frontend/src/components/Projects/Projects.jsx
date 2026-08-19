@@ -1,0 +1,126 @@
+import { useState, useEffect } from "react";
+import "./Projects.css";
+import { motion } from "framer-motion";
+import axios from "axios";
+import SectionHeading from "../SectionHeading/SectionHeading";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+
+const Projects = () => {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fallback projects if the backend is not running
+  const fallbackProjects = [
+    {
+      _id: "1",
+      title: "Personal Expense Tracker",
+      description: "A lightweight command-line financial manager built in C. Supports category budgeting, transaction records, statistics, and persistent file logging.",
+      technologies: ["C Programming", "Data Structures", "File I/O"],
+      liveLink: "#",
+      gitLink: "https://github.com/Karan-syntax/personal-expense-tracker",
+    },
+    {
+      _id: "2",
+      title: "Campus Event API Portal",
+      description: "A secure REST API built with Spring Boot and PostgreSQL, offering user registration, role authorization, validation, pagination, and Swagger UI documentation.",
+      technologies: ["Java", "Spring Boot", "PostgreSQL", "Docker"],
+      liveLink: "#",
+      gitLink: "https://github.com/Karan-syntax",
+    },
+    {
+      _id: "3",
+      title: "Personal Finance backend",
+      description: "A backend service featuring Spring Security, JWT authentication, and automated Mockito/JUnit 5 unit tests for financial transactions.",
+      technologies: ["Java", "Spring Security", "JWT", "JUnit 5"],
+      liveLink: "#",
+      gitLink: "https://github.com/Karan-syntax",
+    },
+  ];
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get("/api/projects");
+        if (response.data && response.data.length > 0) {
+          setProjects(response.data);
+        } else {
+          setProjects(fallbackProjects);
+        }
+      } catch (error) {
+        console.warn("Backend API not reachable. Using local fallback projects list.", error);
+        setProjects(fallbackProjects);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  return (
+    <section className="projects" id="projects">
+      <div className="container">
+        <SectionHeading
+          badgeText="My Portfolio"
+          titleText="Recent"
+          titleHighlight="Projects"
+        />
+
+        {loading ? (
+          <div className="loading-spinner-container">
+            <div className="loading-spinner"></div>
+            <p>Loading projects...</p>
+          </div>
+        ) : (
+          <div className="projects-grid">
+            {projects.map((project, idx) => (
+              <motion.div
+                key={project._id || idx}
+                className="project-card"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
+              >
+                <div className="project-card-glow"></div>
+                <div className="project-content">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-desc">{project.description}</p>
+                  
+                  <div className="project-tech-tags">
+                    {project.technologies.map((tech, techIdx) => (
+                      <span key={techIdx} className="tech-tag">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="project-links">
+                    <a
+                      href={project.gitLink || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link-btn"
+                    >
+                      <FaGithub /> GitHub
+                    </a>
+                    <a
+                      href={project.liveLink || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link-btn primary"
+                    >
+                      <FaExternalLinkAlt /> Live Demo
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default Projects;

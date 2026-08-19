@@ -1,0 +1,565 @@
+/* ===========================================================
+   HERO SECTION
+   =========================================================== */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 100px;
+  padding-bottom: 80px;
+}
+
+.hero-wrapper {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  align-items: center;
+  gap: 40px;
+  width: min(1280px, 92%);
+  margin: 0 auto;
+  z-index: 5;
+}
+
+/* ===========================================================
+   LEFT CONTENT
+   =========================================================== */
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(31, 77, 90, 0.25);
+  border: 1px solid rgba(94, 163, 163, 0.3);
+  border-radius: 100px;
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  margin-bottom: 24px;
+  box-shadow: 0 0 15px rgba(31, 77, 90, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.badge-spark {
+  filter: drop-shadow(0 0 5px var(--primary));
+}
+
+.hero-title {
+  font-size: 4rem;
+  line-height: 1.15;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #5ea3a3 0%, #d9f1ef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-subtitle {
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.highlight-text {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.hero-description {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  opacity: 0.9;
+  max-width: 540px;
+  margin-bottom: 36px;
+}
+
+.bold-highlight {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* BUTTONS */
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.btn-icon {
+  font-size: 0.95rem;
+}
+
+.hero-left .primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #5ea3a3, #1f4d5a);
+  color: #0f1f2b;
+  box-shadow: 0 0 25px rgba(94, 163, 163, 0.25);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.hero-left .primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(94, 163, 163, 0.45);
+}
+
+.hero-left .secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: 1px solid rgba(94, 163, 163, 0.35);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(15, 31, 43, 0.4);
+  color: var(--text-primary);
+  backdrop-filter: blur(10px);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.hero-left .secondary-btn:hover {
+  transform: translateY(-3px);
+  background: rgba(31, 77, 90, 0.25);
+  border-color: var(--primary);
+}
+
+/* STATS */
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  border-top: 1px solid rgba(94, 163, 163, 0.15);
+  padding-top: 32px;
+  max-width: 580px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stat-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(31, 77, 90, 0.25);
+  border: 1px solid rgba(94, 163, 163, 0.18);
+  color: var(--primary);
+  font-size: 1.15rem;
+}
+
+.stat-text h2 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.stat-text span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* ===========================================================
+   RIGHT ORBIT VISUAL
+   =========================================================== */
+
+.hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.orbit-container {
+  width: 480px;
+  height: 480px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* DASHED ORBITS */
+.orbit-line {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.orbit-line.outer {
+  width: 420px;
+  height: 420px;
+  border: 1px dashed rgba(94, 163, 163, 0.18);
+  animation: spinClockwise 60s linear infinite;
+}
+
+.orbit-line.inner {
+  width: 280px;
+  height: 280px;
+  border: 1px dashed rgba(94, 163, 163, 0.1);
+  animation: spinCounterClockwise 45s linear infinite;
+}
+
+@keyframes spinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinCounterClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* ORBIT PARTICLES */
+.orbit-particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+}
+
+.p1 { animation: orbitParticle1 15s linear infinite; }
+.p2 { animation: orbitParticle2 18s linear infinite; }
+.p3 { animation: orbitParticle3 22s linear infinite; }
+.p4 { animation: orbitParticle4 26s linear infinite; }
+
+@keyframes orbitParticle1 {
+  from { transform: rotate(0deg) translateX(210px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(210px) rotate(-360deg); }
+}
+@keyframes orbitParticle2 {
+  from { transform: rotate(90deg) translateX(210px) rotate(-90deg); }
+  to { transform: rotate(450deg) translateX(210px) rotate(-450deg); }
+}
+@keyframes orbitParticle3 {
+  from { transform: rotate(180deg) translateX(210px) rotate(-180deg); }
+  to { transform: rotate(540deg) translateX(210px) rotate(-540deg); }
+}
+@keyframes orbitParticle4 {
+  from { transform: rotate(270deg) translateX(210px) rotate(-270deg); }
+  to { transform: rotate(630deg) translateX(210px) rotate(-630deg); }
+}
+
+/* CENTER CARD */
+.center-card {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  background: rgba(15, 31, 43, 0.85);
+  border: 1px solid rgba(94, 163, 163, 0.32);
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 
+    0 0 45px rgba(94, 163, 163, 0.16),
+    inset 0 0 25px rgba(94, 163, 163, 0.08);
+  z-index: 10;
+  animation: centerCardFloat 6s ease-in-out infinite alternate;
+}
+
+@keyframes centerCardFloat {
+  from { transform: translateY(0px) rotate(0deg); }
+  to { transform: translateY(-6px) rotate(0.8deg); }
+}
+
+.center-glow {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  background: var(--primary);
+  filter: blur(60px);
+  opacity: 0.16;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.center-brand {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  z-index: 2;
+}
+
+.brand-divider {
+  width: 36px;
+  height: 2px;
+  background: var(--primary);
+  margin-bottom: 12px;
+  border-radius: 10px;
+  z-index: 2;
+  box-shadow: 0 0 8px var(--primary);
+}
+
+.center-role {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  color: var(--primary);
+  margin-bottom: 12px;
+  z-index: 2;
+}
+
+.center-tagline {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  z-index: 2;
+}
+
+/* TECH ORBIT ITEMS */
+.tech-orbit-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  animation: bobbingItem 5s ease-in-out infinite;
+}
+
+.tech-orbit-item:nth-child(even) {
+  animation-delay: 1.2s;
+}
+
+.tech-orbit-item:nth-child(3n) {
+  animation-delay: 2.5s;
+}
+
+@keyframes bobbingItem {
+  0% { transform: translate(calc(-50% + var(--x, 0px)), calc(-50% + var(--y, 0px))) translateY(0px); }
+  50% { transform: translate(calc(-50% + var(--x, 0px)), calc(-50% + var(--y, 0px))) translateY(-6px); }
+  100% { transform: translate(calc(-50% + var(--x, 0px)), calc(-50% + var(--y, 0px))) translateY(0px); }
+}
+
+/* Override transform to correctly position the element on layout and add transition */
+.tech-orbit-item {
+  /* Using standard inline calculation now in JSX, so we cancel default translate in anim and set properly */
+  animation: bobbingItemCorrect 6s ease-in-out infinite;
+}
+
+@keyframes bobbingItemCorrect {
+  0%, 100% { margin-top: 0px; }
+  50% { margin-top: -8px; }
+}
+
+.tech-icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(15, 31, 43, 0.85);
+  border: 1px solid rgba(94, 163, 163, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.tech-icon-circle:hover {
+  transform: scale(1.15);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 25px var(--accent-color);
+  background: var(--secondary);
+  color: var(--text-primary);
+}
+
+.tech-name {
+  margin-top: 6px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ===========================================================
+   SCROLL DOWN INDICATOR
+   =========================================================== */
+
+.scroll-down-container {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  z-index: 5;
+}
+
+.scroll-down-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.mouse-icon {
+  width: 20px;
+  height: 34px;
+  border-radius: 12px;
+  border: 2px solid rgba(94, 163, 163, 0.35);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.mouse-wheel {
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--primary);
+  animation: scrollMouse 1.6s infinite ease-in-out;
+}
+
+@keyframes scrollMouse {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(6px); opacity: 0.2; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.scroll-text {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.scroll-arrow {
+  color: var(--primary);
+  font-size: 0.75rem;
+  animation: bounceArrow 1.6s infinite ease-in-out;
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ===========================================================
+   RESPONSIVE LAYOUT
+   =========================================================== */
+
+@media (max-width: 1100px) {
+  .hero-wrapper {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    text-align: center;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-title {
+    font-size: 3.2rem;
+  }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .orbit-container {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+
+  .hero-title {
+    font-size: 2.6rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hero-left .primary-btn,
+  .hero-left .secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-stats {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .orbit-container {
+    transform: scale(0.75);
+    margin-top: -20px;
+  }
+
+  .scroll-down-container {
+    display: none;
+  }
+}
