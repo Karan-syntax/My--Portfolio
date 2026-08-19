@@ -59,7 +59,9 @@ const Contact = () => {
       setStatus({
         submitting: false,
         success: false,
-        message: "Failed to connect to backend API server. Message not recorded.",
+        message:
+          error.response?.data?.message ||
+          "Failed to connect to backend API server. Message not recorded.",
       });
     }
   };
