@@ -9,14 +9,27 @@ const app = express();
 // --- Middleware ---
 app.use(express.json()); // Parses incoming JSON requests
 
-// Explicit CORS configuration to allow your specific Vite development port
+// Explicit CORS configuration to allow local development ports and your production frontend
+const allowedOrigins = [
+    "http://localhost:5173", 
+    "http://127.0.0.1:5173", 
+    "http://localhost:5174", 
+    "http://127.0.0.1:5174"
+];
+
+if (process.env.FRONTEND_URL) {
+    allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
 app.use(cors({
-    origin: [
-        "http://localhost:5173", 
-        "http://127.0.0.1:5173", 
-        "http://localhost:5174", 
-        "http://127.0.0.1:5174"
-    ],
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps, postman, or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+            return callback(null, true);
+        }
+        return callback(new Error('CORS policy: This origin is not allowed access.'));
+    },
     credentials: true
 }));
 
@@ -146,20 +159,6 @@ app.get('/api/seed', async (req, res) => {
                 technologies: ["C Programming", "Data Structures", "File I/O"],
                 liveLink: "#",
                 gitLink: "https://github.com/Karan-syntax/personal-expense-tracker"
-            },
-            {
-                title: "Task Management Application",
-                description: "A complete application utilizing state flows, context variables, and deep user authentication methods.",
-                technologies: ["React", "Express", "Node.js", "MongoDB"],
-                liveLink: "#",
-                gitLink: "#"
-            },
-            {
-                title: "E-Commerce Web Portal",
-                description: "An elegant web portal built to store data elements, structure product lists, and log active shopping data profiles.",
-                technologies: ["React", "Node.js", "Express", "MongoDB"],
-                liveLink: "#",
-                gitLink: "#"
             }
         ]);
         res.json({ message: "Database successfully populated with clean items!" });
