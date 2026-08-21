@@ -45,6 +45,21 @@ async function seedDB() {
         liveLink: "https://ai-weather-app-iota.vercel.app",
         gitLink: "https://github.com/Karan-syntax/Ai-weather-App",
       },
+      {
+        title: "SYNORA - GenAI Workspace",
+        description:
+          "A modern AI-powered workspace designed to bring multiple generative AI capabilities together in one application, with intelligent interactions and a responsive productivity-focused interface.",
+        technologies: [
+          "React",
+         "TypeScript",
+          "Express",
+          "MongoDB",
+          "Groq API",
+          "Sarvam AI",
+    ],
+    liveLink: "https://synora-beige.vercel.app",
+    gitLink: "https://github.com/Karan-syntax/SYNORA",
+  },
     ]);
 
     console.log("🎉 Database successfully populated with projects!");
