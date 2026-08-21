@@ -12,16 +12,26 @@ const Projects = () => {
 
   // Fallback projects if the backend is not running
   const fallbackProjects = [
-    {
-      _id: "1",
-      title: "Personal Expense Tracker",
-      description: "A lightweight command-line financial manager built in C. Supports category budgeting, transaction records, statistics, and persistent file logging.",
-      technologies: ["C Programming", "Data Structures", "File I/O"],
-      liveLink: "#",
-      gitLink: "https://github.com/Karan-syntax/personal-expense-tracker",
-    },
-  ];
-
+  {
+    _id: "1",
+    title: "Personal Expense Tracker",
+    description:
+      "A lightweight command-line financial manager built in C. Supports category budgeting, transaction records, statistics, and persistent file logging.",
+    technologies: ["C Programming", "Data Structures", "File I/O"],
+    liveLink: "#",
+    gitLink:
+      "https://github.com/Karan-syntax/personal-expense-tracker",
+  },
+  {
+    _id: "2",
+    title: "SkyFlow - Premium Weather & AI Assistant",
+    description:
+      "A modern weather application with real-time weather information, 5-day forecasts, responsive UI, and an AI-powered assistant for weather, clothing, and activity recommendations.",
+    technologies: ["React", "JavaScript", "Node.js", "Express", "MongoDB", "AI"],
+    liveLink: "https://ai-weather-app-iota.vercel.app",
+    gitLink: "https://github.com/Karan-syntax/Ai-weather-App",
+  },
+];
   useEffect(() => {
     const fetchProjects = async () => {
       try {

@@ -5,6 +5,7 @@ const dns = require('dns');
 require('dotenv').config();
 
 // Force Node.js to prefer IPv4 DNS resolution (prevents ENETUNREACH errors on Render/IPv6)
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 dns.setDefaultResultOrder('ipv4first');
 
 const app = express();
@@ -71,15 +72,24 @@ app.get('/api/projects', async (req, res) => {
 app.get('/api/seed', async (req, res) => {
     try {
         await Project.deleteMany({}); // Clears old entries
-        await Project.insertMany([
-            {
-                title: "Personal Expense Tracker",
-                description: "A lightweight command-line financial manager built in C. Supports category budgeting, transaction records, statistics, and persistent file logging.",
-                technologies: ["C Programming", "Data Structures", "File I/O"],
-                liveLink: "#",
-                gitLink: "https://github.com/Karan-syntax/personal-expense-tracker"
-            }
-        ]);
+       await Project.insertMany([
+  {
+    title: "Personal Expense Tracker",
+    description:
+      "A lightweight command-line financial manager built in C. Supports category budgeting, transaction records, statistics, and persistent file logging.",
+    technologies: ["C Programming", "Data Structures", "File I/O"],
+    liveLink: "#",
+    gitLink: "https://github.com/Karan-syntax/personal-expense-tracker"
+  },
+  {
+    title: "SkyFlow - Premium Weather & AI Assistant",
+    description:
+      "A modern weather application with real-time weather information, 5-day forecasts, responsive UI, and an AI-powered assistant for weather, clothing, and activity recommendations.",
+    technologies: ["React", "JavaScript", "Node.js", "Express", "MongoDB", "AI"],
+    liveLink: "https://ai-weather-app-iota.vercel.app",
+    gitLink: "https://github.com/Karan-syntax/Ai-weather-App"
+  }
+]);
         res.json({ message: "Database successfully populated with clean items!" });
     } catch (error) {
         res.status(500).json({ error: error.message });
